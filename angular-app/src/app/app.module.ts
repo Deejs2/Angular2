@@ -9,13 +9,19 @@ import { HeaderComponent } from './admin/header/header.component';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { FooterComponent } from './admin/footer/footer.component';
 import { PersonalDetailFormComponent } from './admin/reactive-form/personal-detail-form/personal-detail-form.component';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { PersonalDetailAddComponent } from './admin/reactive-form/personal-detail-add/personal-detail-add.component';
 import { PersonalDetailEditComponent } from './admin/reactive-form/personal-detail-edit/personal-detail-edit.component';
 import { AgeFormatterPipe } from './pipes/age-formatter.pipe';
 import { DateOfBirthFormatterPipe } from './pipes/date-of-birth-formatter.pipe';
 import { NepaliNumberFormatterPipe } from './pipes/nepali-number-formatter.pipe';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { HttpHandlerService } from './services/http-handler.service';
+import { HttpClientModule } from '@angular/common/http';
+import { PersonalDetailViewComponent } from './admin/reactive-form/personal-detail-view/personal-detail-view.component';
+import { PersonalDetailViewByIdComponent } from './admin/reactive-form/personal-detail-view-by-id/personal-detail-view-by-id.component';
 
 @NgModule({
   declarations: [
@@ -31,15 +37,22 @@ import { NepaliNumberFormatterPipe } from './pipes/nepali-number-formatter.pipe'
     PersonalDetailEditComponent,
     AgeFormatterPipe,
     DateOfBirthFormatterPipe,
-    NepaliNumberFormatterPipe
+    NepaliNumberFormatterPipe,
+    PersonalDetailViewComponent,
+    PersonalDetailViewByIdComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
-    RouterOutlet
+    RouterOutlet,
+    RouterLink,
+    HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(), 
+    DatePipe,
+    HttpHandlerService
   ],
   bootstrap: [AppComponent]
 })
