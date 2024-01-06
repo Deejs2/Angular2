@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
+  constructor(private router: Router){}
+
+  onClickDashboard(){
+    this.router.navigate(['admin/dashboard'])
+  }
+
+  onClickViewDetail(){
+    this.router.navigate(['admin/personal-detail'])
+  }
 }

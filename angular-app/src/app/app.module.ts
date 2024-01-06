@@ -8,7 +8,14 @@ import { LayoutComponent } from './admin/layout/layout.component';
 import { HeaderComponent } from './admin/header/header.component';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { FooterComponent } from './admin/footer/footer.component';
-import { PersonalDetailFormComponent } from './admin/personal-detail-form/personal-detail-form.component';
+import { PersonalDetailFormComponent } from './admin/reactive-form/personal-detail-form/personal-detail-form.component';
+import { Router, RouterOutlet } from '@angular/router';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { PersonalDetailAddComponent } from './admin/reactive-form/personal-detail-add/personal-detail-add.component';
+import { PersonalDetailEditComponent } from './admin/reactive-form/personal-detail-edit/personal-detail-edit.component';
+import { AgeFormatterPipe } from './pipes/age-formatter.pipe';
+import { DateOfBirthFormatterPipe } from './pipes/date-of-birth-formatter.pipe';
+import { NepaliNumberFormatterPipe } from './pipes/nepali-number-formatter.pipe';
 
 @NgModule({
   declarations: [
@@ -18,11 +25,18 @@ import { PersonalDetailFormComponent } from './admin/personal-detail-form/person
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
-    PersonalDetailFormComponent
+    PersonalDetailFormComponent,
+    DashboardComponent,
+    PersonalDetailAddComponent,
+    PersonalDetailEditComponent,
+    AgeFormatterPipe,
+    DateOfBirthFormatterPipe,
+    NepaliNumberFormatterPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterOutlet
   ],
   providers: [
     provideClientHydration()

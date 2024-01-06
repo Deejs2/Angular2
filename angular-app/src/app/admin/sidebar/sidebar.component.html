@@ -1,1 +1,33 @@
-<p>sidebar works!</p>
+<ul class="nav nav-pills p-3 flex-column mb-auto">
+    <li>
+        <a (click)="onClickDashboard()" class="nav-link link-body-emphasis pointer fs-6">
+            <i class="fa-solid fa-gauge-high me-2"></i>Dashboard
+        </a>
+    </li>
+    <h6
+        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 text-body-secondary text-uppercase">
+        <span>Reactive Form</span>
+    </h6>
+    <li>
+        <button class="ms-1 btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+            <i class="fa-solid fa-table-list me-2"></i>Personal Details <i class="fa-solid fa-chevron-down ms-3"></i>
+        </button>
+        <div class="collapse" id="dashboard-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li class="ms-4"><a (click)="onClickViewDetail()" class="nav-link link-body-emphasis pointer">View
+                        Details</a></li>
+            </ul>
+        </div>
+    </li>
+    <!-- <li>
+      <a href="#" class="nav-link link-body-emphasis">
+        Products
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link link-body-emphasis">
+        Customers
+      </a>
+    </li> -->
+</ul>
