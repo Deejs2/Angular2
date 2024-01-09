@@ -7,6 +7,8 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { PersonalDetailAddComponent } from './admin/reactive-form/personal-detail-add/personal-detail-add.component';
 import { PersonalDetailEditComponent } from './admin/reactive-form/personal-detail-edit/personal-detail-edit.component';
 import { PersonalDetailViewComponent } from './admin/reactive-form/personal-detail-view/personal-detail-view.component';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -15,7 +17,12 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'login', 
+    component: LoginComponent
+  },
+  {
     path: 'admin', 
+    canActivate: [AuthGuard],
     component: LayoutComponent,
     children: [
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpHandlerService } from '../../../services/http-handler.service';
 import { SharedService } from '../../../services/shared.service';
+import { ToastrNotificationService } from '../../../services/toastr-notification.service';
 
 @Component({
   selector: 'app-personal-detail-add',
@@ -22,7 +23,8 @@ export class PersonalDetailAddComponent implements OnInit {
     private date : DatePipe, 
     private sharedService: SharedService, 
     private httpService: HttpHandlerService,
-    private location: Location
+    private location: Location,
+    private toastr: ToastrNotificationService
     ) {}
 
   ngOnInit(): void {
@@ -70,6 +72,7 @@ export class PersonalDetailAddComponent implements OnInit {
   }
 
   onClickCancel(){
+    this.toastr.showCancel("You have cancel your request!")
     this.location.back();
   }
 
@@ -87,7 +90,7 @@ export class PersonalDetailAddComponent implements OnInit {
           // Handle the API response
           // console.log('API Response:', response);
           console.log("Form Value Submitted by API");
-          // this.toastr.showSuccess('Hello world!');
+          this.toastr.showSuccess('Form Submitted Successfully!');
           this.onClickCancel();
         },
         (error: any) => {
@@ -97,6 +100,8 @@ export class PersonalDetailAddComponent implements OnInit {
         }
       );
       
+    }else{
+      this.toastr.showCancel("Please Enter a Valid Details!")
     }
 
     

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,11 +17,17 @@ import { AgeFormatterPipe } from './pipes/age-formatter.pipe';
 import { DateOfBirthFormatterPipe } from './pipes/date-of-birth-formatter.pipe';
 import { NepaliNumberFormatterPipe } from './pipes/nepali-number-formatter.pipe';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HttpHandlerService } from './services/http-handler.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PersonalDetailViewComponent } from './admin/reactive-form/personal-detail-view/personal-detail-view.component';
 import { PersonalDetailViewByIdComponent } from './admin/reactive-form/personal-detail-view-by-id/personal-detail-view-by-id.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastrNotificationService } from './services/toastr-notification.service';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './guard/auth.guard';
+import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -39,11 +45,18 @@ import { PersonalDetailViewByIdComponent } from './admin/reactive-form/personal-
     DateOfBirthFormatterPipe,
     NepaliNumberFormatterPipe,
     PersonalDetailViewComponent,
-    PersonalDetailViewByIdComponent
+    PersonalDetailViewByIdComponent,
+    LoginComponent
   ],
   imports: [
     ReactiveFormsModule,
-    BrowserModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    }),
     AppRoutingModule,
     RouterOutlet,
     RouterLink,
@@ -52,7 +65,12 @@ import { PersonalDetailViewByIdComponent } from './admin/reactive-form/personal-
   providers: [
     provideClientHydration(), 
     DatePipe,
-    HttpHandlerService
+    HttpHandlerService,
+    AgeFormatterPipe,
+    NepaliNumberFormatterPipe,
+    ToastrNotificationService,
+    AuthGuard,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

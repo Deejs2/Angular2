@@ -1,1 +1,84 @@
-<p>personal-detail-view-by-id works!</p>
+<div class="container-fluid px-4">
+    
+
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Table
+        </div>
+        <div class="card-header text-end">
+            <button class="btn btn-outline-primary" (click)="onClickAddPersonalDetail()" type="button"><i class="fas fa-plus"></i> Add Personal Detail</button>
+            
+        </div>
+        <div class="card-body">
+    
+            <table class="table table-primary table-bordered">
+                <thead>
+                    <th>#</th>
+                    <th>Personal ID</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>DateOfBirth</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                </thead>
+                <tbody *ngFor="let data of formData; let i=index">
+                    <tr>
+                        <td>{{i+1}}</td>
+                        <td>{{data.id}}</td>
+                        <td>{{data.firstname}}</td>
+                        <td>{{data.lastname}}</td>
+                        <td>{{data.dateOfBirth | date}}</td>
+                        <td>{{data.age | ageFormatter}}</td>
+                        <td>{{data.email}}</td>
+                        <td>{{data.phone}}</td>
+                        <td>
+                            <ul class="nav">
+                                <!-- <li class="nav-item"><a class="nav-link" routerLink="/app-reactive-form-view-by-id/{{data.id}}" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-regular fa-eye"></i></a></li> -->
+                                <li class="nav-item"><button (click)="onClickShowPersonalDetail(data.id)" type="button" class="btn btn-outline-info"><i class="fa-regular fa-eye"></i></button></li>
+                                <!-- <li class="nav-item"><a class="nav-link" routerLink="/app-reactive-form-add-more-edit/{{data.id}}" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-regular fa-pen-to-square"></i></a></li> -->
+                                <li class="nav-item px-2"><button (click)="onClickEditPersonalDetail(data.id)" type="button" class="btn btn-outline-secondary"><i class="fa-regular fa-pen-to-square"></i></button></li>
+                                <!-- <li class="nav-item"><a class="nav-link" routerLink="/app-reactive-form-view/{{data.id}}" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-solid fa-trash"></i></a></li> -->
+                                <li class="nav-item"><button (click)="onClickDelete(data.id)" class="btn btn-outline-danger" type="button"><i class="fa-solid fa-trash"></i></button></li>
+                              </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="9">
+                            <table class="table mb-0">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Family ID</th>
+                                    <th>Family FirstName</th>
+                                    <th>Family LastName</th>
+                                    <th>Family DateOfBirth</th>
+                                    <th>Family Age</th>
+                                    <th>Family Email</th>
+                                    <th>Family Phone</th>
+                                </tr>
+                                <tr *ngFor="let fdata of data.familyDetailArray; let i=index">
+                                    <td>{{i | nepaliNumberFormatter}}</td>
+                                    <td>{{fdata.id}}</td>
+                                    <td>{{fdata.familyFirstname}}</td>
+                                    <td>{{fdata.familyLastname}}</td>
+                                    <td>{{fdata.familyDateOfBirth | date}}</td>
+                                    <td>{{fdata.familyAge | ageFormatter}}</td>
+                                    <td>{{fdata.familyEmail}}</td>
+                                    <td>{{fdata.familyPhone}}</td>
+                                    </tr>
+                            </table>
+                        </td>
+                    </tr>
+        
+                </tbody>
+                <tbody *ngIf="formDataStatus==false">
+                    <P>No Record Found!</P>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>
