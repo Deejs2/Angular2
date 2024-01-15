@@ -8,7 +8,9 @@ import { PersonalDetailAddComponent } from './admin/reactive-form/personal-detai
 import { PersonalDetailEditComponent } from './admin/reactive-form/personal-detail-edit/personal-detail-edit.component';
 import { PersonalDetailViewComponent } from './admin/reactive-form/personal-detail-view/personal-detail-view.component';
 import { LoginComponent } from './auth/login/login.component';
-import { AuthGuard } from './guard/auth.guard';
+import { negatGuard } from './guard/negat.guard';
+import { authGuard } from './guard/auth.guard';
+import { PersonalDetailViewByIdComponent } from './admin/reactive-form/personal-detail-view-by-id/personal-detail-view-by-id.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -18,11 +20,12 @@ const routes: Routes = [
   },
   {
     path: 'login', 
+    canActivate: [negatGuard],
     component: LoginComponent
   },
   {
     path: 'admin', 
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
     component: LayoutComponent,
     children: [
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -34,7 +37,8 @@ const routes: Routes = [
           {path: '', redirectTo: 'view', pathMatch: 'full'},
           {path:'add', component: PersonalDetailAddComponent},
           {path:'edit', component: PersonalDetailEditComponent},
-          {path:'view', component: PersonalDetailViewComponent}
+          {path:'view', component: PersonalDetailViewComponent},
+          {path:'viewById', component: PersonalDetailViewByIdComponent}
         ]
       }
     ]

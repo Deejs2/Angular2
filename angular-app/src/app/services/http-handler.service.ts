@@ -15,27 +15,28 @@ export class HttpHandlerService {
   private loginUrl = `http://localhost:8080/api/v1/login`
 
   createPersonalDetail(data: any):Observable<any>{
-    return this.http.post<any>(this.baseUrl, data);
+    return this.http.post<any>(`${this.baseUrl}/save`, data);
   }
 
   getPersonalDetail():Observable<GlobalApiHandler<PersonalDetail>>{
-    const headers = new HttpHeaders().set(
-      'Authorization',
-      `Bearer ${localStorage.getItem('token')}`
-    );
-    return this.http.get<GlobalApiHandler<PersonalDetail>>(`${this.baseUrl}/fetch`, { headers: headers });
-  }
-
-  getPersonalDetailById(id: number):Observable<GlobalApiHandler<PersonalDetail>>{
+    // const headers = new HttpHeaders().set(
+    //   'Authorization',
+    //   `Bearer ${localStorage.getItem('token')}`
+    // );
+    // return this.http.get<GlobalApiHandler<PersonalDetail>>(`${this.baseUrl}/fetch`, { headers: headers });
     return this.http.get<GlobalApiHandler<PersonalDetail>>(`${this.baseUrl}/fetch`);
   }
 
+  getPersonalDetailById(id: number):Observable<GlobalApiHandler<PersonalDetail>>{
+    return this.http.get<GlobalApiHandler<PersonalDetail>>(`${this.baseUrl}/fetch/`+id);
+  }
+
   updatePersonalDetail(id: number, data: any):Observable<any>{
-    return this.http.put<any>(this.baseUrl+id, data);
+    return this.http.put<any>(`${this.baseUrl}/update/`+id, data);
   }
 
   deletePersonalDetail(id: number):Observable<any>{
-    return this.http.delete<any>(this.baseUrl+id);
+    return this.http.delete<any>(`${this.baseUrl}/delete/`+id);
   }
 
   postUserLogin(data: any):Observable<any>{

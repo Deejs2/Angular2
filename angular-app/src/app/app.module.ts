@@ -19,15 +19,16 @@ import { NepaliNumberFormatterPipe } from './pipes/nepali-number-formatter.pipe'
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpHandlerService } from './services/http-handler.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { PersonalDetailViewComponent } from './admin/reactive-form/personal-detail-view/personal-detail-view.component';
 import { PersonalDetailViewByIdComponent } from './admin/reactive-form/personal-detail-view-by-id/personal-detail-view-by-id.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastrNotificationService } from './services/toastr-notification.service';
 import { LoginComponent } from './auth/login/login.component';
-import { AuthGuard } from './guard/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
+import { loggingInterceptor } from './inteceptors/logging.interceptor';
+import { FullnamePipe } from './pipes/fullname.pipe';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AuthenticationService } from './services/authentication.service';
     NepaliNumberFormatterPipe,
     PersonalDetailViewComponent,
     PersonalDetailViewByIdComponent,
-    LoginComponent
+    LoginComponent,
+    FullnamePipe
   ],
   imports: [
     ReactiveFormsModule,
@@ -60,17 +62,19 @@ import { AuthenticationService } from './services/authentication.service';
     AppRoutingModule,
     RouterOutlet,
     RouterLink,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(), 
     DatePipe,
+    FullnamePipe,
     HttpHandlerService,
     AgeFormatterPipe,
     NepaliNumberFormatterPipe,
     ToastrNotificationService,
-    AuthGuard,
-    AuthenticationService
+    AuthenticationService,
+    provideHttpClient(withFetch(),withInterceptors([loggingInterceptor]))
   ],
   bootstrap: [AppComponent]
 })

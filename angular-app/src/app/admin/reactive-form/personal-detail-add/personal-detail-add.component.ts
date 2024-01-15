@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpHandlerService } from '../../../services/http-handler.service';
 import { SharedService } from '../../../services/shared.service';
 import { ToastrNotificationService } from '../../../services/toastr-notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-personal-detail-add',
@@ -24,7 +25,8 @@ export class PersonalDetailAddComponent implements OnInit {
     private sharedService: SharedService, 
     private httpService: HttpHandlerService,
     private location: Location,
-    private toastr: ToastrNotificationService
+    private toastr: ToastrNotificationService,
+    private router: Router
     ) {}
 
   ngOnInit(): void {
@@ -72,7 +74,6 @@ export class PersonalDetailAddComponent implements OnInit {
   }
 
   onClickCancel(){
-    this.toastr.showCancel("You have cancel your request!")
     this.location.back();
   }
 
@@ -91,7 +92,7 @@ export class PersonalDetailAddComponent implements OnInit {
           // console.log('API Response:', response);
           console.log("Form Value Submitted by API");
           this.toastr.showSuccess('Form Submitted Successfully!');
-          this.onClickCancel();
+          this.location.back();
         },
         (error: any) => {
           // Handle API error

@@ -53,7 +53,7 @@ export class PersonalDetailViewComponent {
   }
   
   onClickShowPersonalDetail(id: any){
-    this.router.navigate(['personal-detail/view'],{queryParams: {id:id}})
+    this.router.navigate(['admin/personal-detail/viewById'],{queryParams: {id:id}})
   }
 
   onClickEditPersonalDetail(id: any){
@@ -67,6 +67,7 @@ export class PersonalDetailViewComponent {
         (response:any) => {
           console.log(response.data)
           this.getDetails();
+          this.toastr.showCancel("You have Deleted ID: "+id)
         },
         (error:any) => {
           console.log("Error While Deleting")
